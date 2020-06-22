@@ -109,3 +109,16 @@ def generate_views():
     return random_result
 
 print(generate_views())
+
+
+random_10_results = []
+result = 0
+
+def generate_views_10times():
+    for i in range(10):
+        for i in full_list:
+            result = random.choice(full_list)
+            random_10_results.append(result)
+    return random_10_results
+
+print(generate_views_10times())
