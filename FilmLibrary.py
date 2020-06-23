@@ -140,19 +140,23 @@ print(top_titles(3))
 
 #top_titles() z content_type
 
-content_type = ("top_films", "top_series")
+#content_type = ("top_films", "top_series")
 
 def top_titles(content_type, top):
     top_n_type_titles = []
     if content_type == "top_films":
         for i in random_10_results:
-            if type(i) == Film:
-                top_n_type_titles = sorted(random_10_results, key = lambda i: i.times_played, reverse = True)[:top]
+            top_n_type_titles = [i for i in random_10_results if type(i) == Film]
+            top_n_type_titles = sorted(top_n_type_titles, key = lambda film: film.times_played, reverse = True)[:top]
+        return top_n_type_titles
     elif content_type == "top_series":
-       top_n_type_titles = sorted(random_10_results, key = lambda Series: Series.times_played, reverse = True)[:top]
+        for i in random_10_results:
+            top_n_type_titles = [i for i in random_10_results if isinstance(i, Series)]
+            top_n_type_titles = sorted(top_n_type_titles, key = lambda film: film.times_played, reverse = True)[:top]
+        return top_n_type_titles
     else:
-        top_n_type_titles = sorted(random_10_results, key = lambda Film: Film.times_played, reverse = True)[:top]
-    return top_n_type_titles
+        top_n_type_titles = sorted(random_10_results, key = lambda film: film.times_played, reverse = True)[:top]
+        return top_n_type_titles
 
-print(top_titles("top_films", 2))
+print(top_titles("top_series", 2))
 
