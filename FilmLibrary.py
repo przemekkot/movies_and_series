@@ -44,13 +44,6 @@ series1_3 = Series(title="Friends", year="1994", genre="comedy", season="01", ep
 series1_4 = Series(title="Friends", year="1994", genre="comedy", season="01", episode="04", times_played=0)
 series1_5 = Series(title="Friends", year="1994", genre="comedy", season="01", episode="05", times_played=0)
 
-#print(film1)
-#print(film2)
-#print(film3)
-
-#print(series1_1)
-#print(series1_3)
-#print(series1_3)
 
 full_list = []
 films = []
@@ -66,13 +59,6 @@ full_list.append(series1_2)
 full_list.append(series1_3)
 full_list.append(series1_4)
 full_list.append(series1_5)
-
-#print(full_list)
-#sorted_full_list = sorted(full_list, key=operator.attrgetter('title'))
-#print(sorted_full_list)
-#print(sorted(full_list))
-#full_list_sorted = sorted(full_list, key=lambda 1: 1.count, reverse=True)
-#print(full_list_sorted)
 
 #7
 def get_movies():
@@ -119,13 +105,13 @@ print(generate_views())
 #10
 
 result = 0
-random_10_results = []
+entire_library = []
 
 def generate_views_10times():
     for n in range(10):
         result = generate_views()
-        random_10_results.append(result)
-    return random_10_results
+        entire_library.append(result)
+    return entire_library
 
 print(generate_views_10times())
 
@@ -133,30 +119,22 @@ print(generate_views_10times())
 
 def top_titles(top):
     top_n_titles = []
-    top_n_titles = sorted(random_10_results, key = lambda Film: Film.times_played, reverse = True)[:top]
+    top_n_titles = sorted(entire_library, key = lambda film: film.times_played, reverse = True)[:top]
     return top_n_titles
 
 print(top_titles(3))
 
 #top_titles() z content_type
 
-#content_type = ("top_films", "top_series")
-
 def top_titles(content_type, top):
-    top_n_type_titles = []
+    selected_data_by_type = []
     if content_type == "top_films":
-        for i in random_10_results:
-            top_n_type_titles = [i for i in random_10_results if type(i) == Film]
-            top_n_type_titles = sorted(top_n_type_titles, key = lambda film: film.times_played, reverse = True)[:top]
-        return top_n_type_titles
+        selected_data_by_type = [i for i in entire_library if type(i) == Film]
     elif content_type == "top_series":
-        for i in random_10_results:
-            top_n_type_titles = [i for i in random_10_results if isinstance(i, Series)]
-            top_n_type_titles = sorted(top_n_type_titles, key = lambda film: film.times_played, reverse = True)[:top]
-        return top_n_type_titles
+        selected_data_by_type = [i for i in entire_library if isinstance(i, Series)]       
     else:
-        top_n_type_titles = sorted(random_10_results, key = lambda film: film.times_played, reverse = True)[:top]
-        return top_n_type_titles
+        selected_data_by_type = entire_library
+
+    return sorted(selected_data_by_type, key = lambda film: film.times_played, reverse = True)[:top]
 
 print(top_titles("top_series", 2))
-
